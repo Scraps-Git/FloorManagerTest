@@ -10,8 +10,8 @@ public class RoomType
 	private String name;
 	
 	// Position
-	private int posX;
-	private int posY;
+	private int x;
+	private int y;
 	
 	// Dimensions
 	private int height;
@@ -30,8 +30,8 @@ public class RoomType
 	public RoomType (String name, int x, int y, int h, int w)
 	{
 		this.name = name;
-		this.posX = x;
-		this.posY = y;
+		this.x = x;
+		this.y = y;
 		this.height = h;
 		this.width = w;
 	}
@@ -39,11 +39,11 @@ public class RoomType
 	public void draw (Graphics2D g)
 	{
 		g.setColor(colorUnselectedBorder);
-		g.drawRect(posX, posY, height, width);
+		g.drawRect(x, y, height, width);
 		g.setColor(colorUnselectedBox);
-		g.fillRect(posX, posY, height, width);
+		g.fillRect(x, y, height, width);
 		g.setColor(textColor);
 		g.setFont(textFont);
-		g.drawString(name, posX + (width / 2), posY + (height / 2));
+		g.drawString(name, x + (width / 2), y + (height / 2));
 	}
 }
