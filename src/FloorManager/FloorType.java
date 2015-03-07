@@ -40,6 +40,10 @@ public abstract class FloorType
 	public abstract void mousePressed(MouseEvent e);
 	public abstract void mouseReleased(MouseEvent e);
 	
+	// Mouse listener events
+	public abstract void mouseMoved(MouseEvent e);
+	public abstract void mouseDragged(MouseEvent e);
+	
 	// Keyboard events
 	public abstract void keyTyped(KeyEvent e);
 	public abstract void keyPressed(KeyEvent e);

@@ -3,8 +3,9 @@ package FloorManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
 
-public class RoomType 
+public class RoomType
 {
 	// Name of the room
 	private String name;
@@ -17,17 +18,19 @@ public class RoomType
 	private int height;
 	private int width;
 	
-	// Colors and font
-	private final static Font textFont = new Font("Arial", Font.BOLD, 12);
-	private final static Color textColor = Color.WHITE;
-	private final static Color colorUnselectedBox = Color.GRAY; 
-	private final static Color colorUnselectedBorder = Color.DARK_GRAY;
-	private final static Color colorHighlightedBox = Color.BLUE;
-	private final static Color colorHighlightedBorder = new Color(0,0,128); // Navy blue
-	private final static Color colorSelectedBox = new Color(255,165,0); // Orange
-	private final static Color colorSelectedBorder = new Color(255,69,0); // Orange red
+	// Status
+	private boolean selected;
+	private boolean highlighted;
 	
-	public RoomType (String name, int x, int y, int h, int w)
+	// Colors and font
+	private final static Font TEXT_FONT = new Font("Arial", Font.BOLD, 12);
+	private final static Color TEXT_COLOR = Color.WHITE;
+	private final static Color BORDER = Color.DARK_GRAY;
+	private final static Color UNSELECTED_BOX = Color.GRAY; 
+	private final static Color HIGHLIGHTED_BOX = new Color(102,255,255); // Light blue
+	private final static Color SELECTED_BOX = new Color(255,165,0); // Orange
+	
+	public RoomType(String name, int x, int y, int h, int w)
 	{
 		this.name = name;
 		this.x = x;
@@ -36,14 +39,69 @@ public class RoomType
 		this.width = w;
 	}
 	
-	public void draw (Graphics2D g)
+	public void selectRoom()
 	{
-		g.setColor(colorUnselectedBorder);
-		g.drawRect(x, y, height, width);
-		g.setColor(colorUnselectedBox);
-		g.fillRect(x, y, height, width);
-		g.setColor(textColor);
-		g.setFont(textFont);
+		if (selected == false)
+			selected = true;
+		else
+			selected = false;		
+	}
+	
+	public void highlightRoom()
+	{
+		if (highlighted == false)
+			highlighted = true;
+		else
+			highlighted = false;		
+	}
+	
+	public boolean findRoom(int maxX, int minX, int maxY, int minY) {
+		//System.out.println("minX " + minX + " >= " + this.x + " or " + "maxX " + maxX + " >= " + this.x);
+		//System.out.println("minX " + minX + " < " + (this.x + this.width) + " or " + "maxX " + maxX + " < " + (this.x + this.width));
+		//System.out.println("minY " + minY + " >= " + this.y + " or " + "maxY " + maxY + " >= " + this.y);
+		//System.out.println("minY " + minY + " < " + (this.y + this.height) + " or " + "maxY " + maxY + " < " + (this.y + this.height));
+		if ((minX >= this.x || maxX >= this.x) 
+				&& (minX < this.x + this.width || maxX < this.x + this.width)
+				&& (minY >= this.y || maxY >= this.y)
+				&& (minY < this.y + this.height || maxY < this.y + this.height))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isSelected() {
+		return selected;
+	}
+	
+	public boolean isHighlighted() {
+		return highlighted;
+	}
+	
+	public void draw(Graphics2D g)
+	{
+		if (this.isSelected())
+		{
+			g.setColor(BORDER);
+			g.drawRect(x-1, y-1, height+1, width+1);
+			g.setColor(SELECTED_BOX);
+			g.fillRect(x, y, height, width);
+		}
+		else if (this.isHighlighted())
+		{
+			g.setColor(BORDER);
+			g.drawRect(x-1, y-1, height+1, width+1);
+			g.setColor(HIGHLIGHTED_BOX);
+			g.fillRect(x, y, height, width);
+		}
+		else
+		{
+			g.setColor(BORDER);
+			g.drawRect(x-1, y-1, height+1, width+1);
+			g.setColor(UNSELECTED_BOX);
+			g.fillRect(x, y, height, width);
+		}
+		g.setColor(TEXT_COLOR);
+		g.setFont(TEXT_FONT);
 		g.drawString(name, x + (width / 2), y + (height / 2));
 	}
 }

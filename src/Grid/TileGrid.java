@@ -1,6 +1,7 @@
 package Grid;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 
 import Main.FloorPanel;
 
@@ -47,6 +48,22 @@ public class TileGrid
 			map[targetRow][targetCol].deselect();
 		else
 			map[targetRow][targetCol].select();
+	}
+	
+	public int getRows() {
+		return numRows;
+	}
+	
+	public int getCols() {
+		return numCols;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 	
 	public void draw(java.awt.Graphics2D g)
@@ -98,5 +115,10 @@ public class TileGrid
 				}
 			}
 		}
+	}
+	
+	public void mousePressed(MouseEvent e)
+	{
+		this.selectTile(e.getX(), e.getY());
 	}
 }

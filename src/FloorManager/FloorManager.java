@@ -33,7 +33,10 @@ public class FloorManager
 	public void mouseEntered(MouseEvent e) { floorList.get(currentFloor).mouseEntered(e); }
 	public void mouseExited(MouseEvent e) { floorList.get(currentFloor).mouseExited(e); }
 	public void mousePressed(MouseEvent e) 	{ floorList.get(currentFloor).mousePressed(e); }
-	public void mouseReleased(MouseEvent e) { floorList.get(currentFloor).mouseReleased(e); }	
+	public void mouseReleased(MouseEvent e) { floorList.get(currentFloor).mouseReleased(e); }
+	
+	public void mouseMoved(MouseEvent e) { floorList.get(currentFloor).mouseMoved(e); }
+	public void mouseDragged(MouseEvent e) { floorList.get(currentFloor).mouseDragged(e); }
 	
 	public void keyTyped(KeyEvent e) { floorList.get(currentFloor).keyTyped(e); }	
 	public void keyPressed(KeyEvent e) { floorList.get(currentFloor).keyPressed(e); }

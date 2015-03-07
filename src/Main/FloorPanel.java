@@ -7,13 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
 import FloorManager.FloorManager;
 
-public class FloorPanel extends JPanel implements Runnable, KeyListener, MouseListener
+public class FloorPanel extends JPanel implements Runnable, KeyListener, MouseListener, MouseMotionListener
 {
 	// Dimensions of the panel
 	public static final int WIDTH = 600;
@@ -36,6 +37,7 @@ public class FloorPanel extends JPanel implements Runnable, KeyListener, MouseLi
 	{		
 		super();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		addMouseMotionListener(this);
 		addMouseListener(this);
 		addKeyListener(this);
 		setFocusable(true);
@@ -110,7 +112,10 @@ public class FloorPanel extends JPanel implements Runnable, KeyListener, MouseLi
 	public void mouseEntered(MouseEvent e) { fm.mouseEntered(e); }
 	public void mouseExited(MouseEvent e) {	fm.mouseExited(e); }
 	public void mousePressed(MouseEvent e) 	{ fm.mousePressed(e); }
-	public void mouseReleased(MouseEvent e) { fm.mouseReleased(e); }	
+	public void mouseReleased(MouseEvent e) { fm.mouseReleased(e); }
+	
+	public void mouseMoved(MouseEvent e) { fm.mouseMoved(e); }
+	public void mouseDragged(MouseEvent e) { fm.mouseDragged(e); }
 	
 	public void keyTyped(KeyEvent e) { fm.keyTyped(e); }	
 	public void keyPressed(KeyEvent e) { fm.keyPressed(e); }
